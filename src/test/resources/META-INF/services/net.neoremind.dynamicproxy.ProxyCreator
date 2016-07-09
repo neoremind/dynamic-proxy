@@ -1,0 +1,4 @@
+net.neoremind.dynamicproxy.impl.JdkProxyCreator
+net.neoremind.dynamicproxy.impl.JavassistCreator
+net.neoremind.dynamicproxy.impl.CglibCreator
+net.neoremind.dynamicproxy.impl.ASMCreator
