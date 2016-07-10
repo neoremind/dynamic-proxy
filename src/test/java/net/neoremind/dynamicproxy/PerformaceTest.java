@@ -24,10 +24,10 @@ public class PerformaceTest {
     private ProxyCreator asmCreator = new ASMCreator();
     private ProxyCreator byteBuddyCreator = new ByteBuddyCreator();
 
-    public static final int INVOKE_NUM = 1000 * 1000 * 10;
+    public static final int INVOKE_NUM = 1000 * 1000 * 1;
 
     @Test
-    public void testPerformace() {
+    public void testPerformance() {
         Echo jdkProxyCreatorInvokerProxy = jdkProxyCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
         Echo javassistCreatorInvokerProxy = javassistCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
         Echo cglibCreatorInvokerProxy = cglibCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
@@ -36,9 +36,9 @@ public class PerformaceTest {
 
         innerTest(byteBuddyCreatorInvokerProxy);
         innerTest(asmCreatorInvokerProxy);
-        innerTest(cglibCreatorInvokerProxy);
-        innerTest(javassistCreatorInvokerProxy);
-        innerTest(jdkProxyCreatorInvokerProxy);
+        //innerTest(cglibCreatorInvokerProxy);
+       // innerTest(javassistCreatorInvokerProxy);
+       // innerTest(jdkProxyCreatorInvokerProxy);
     }
 
     public void innerTest(Echo echo) {

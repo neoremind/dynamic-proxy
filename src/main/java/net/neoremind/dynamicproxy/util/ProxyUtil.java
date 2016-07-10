@@ -48,10 +48,6 @@ public abstract class ProxyUtil {
         NULL_VALUE_MAP = Collections.unmodifiableMap(nullValues);
     }
 
-    public static Class<?>[] getAllInterfaces(Class<?> cls) {
-        return cls == null ? null : ClassUtil.getAllInterfaces(cls).toArray(Emptys.EMPTY_CLASS_ARRAY);
-    }
-
     public static String getJavaClassName(Class<?> clazz) {
         if (clazz.isArray()) {
             return getJavaClassName(clazz.getComponentType()) + "[]";
@@ -83,36 +79,6 @@ public abstract class ProxyUtil {
     public static boolean isEqualsMethod(Method method) {
         return "equals".equals(method.getName()) && Boolean.TYPE.equals(method.getReturnType())
                 && method.getParameterTypes().length == 1 && Object.class.equals(method.getParameterTypes()[0]);
-    }
-
-    public static String getProxyName(Class<?> targetClass, String prefix) {
-        String className = ClassUtil.getPackageName(targetClass) + "." + prefix + targetClass.getSimpleName();
-        return className;
-    }
-
-    public static String getProxyName(String targetClass, String prefix) {
-        String className =
-                ClassUtil.getPackageName(targetClass) + "." + prefix
-                        + substringAfterLast(targetClass, ".");
-        return className;
-    }
-
-    public static String substringAfterLast(String str, String separator) {
-        if ((str == null) || (str.length() == 0)) {
-            return str;
-        }
-
-        if ((separator == null) || (separator.length() == 0)) {
-            return "";
-        }
-
-        int pos = str.lastIndexOf(separator);
-
-        if ((pos == -1) || (pos == (str.length() - separator.length()))) {
-            return "";
-        }
-
-        return str.substring(pos + separator.length());
     }
 
 }

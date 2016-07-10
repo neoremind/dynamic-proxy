@@ -1,12 +1,10 @@
 package net.neoremind.dynamicproxy.impl;
 
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
@@ -14,15 +12,15 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.GeneratorAdapter;
 
 import net.neoremind.dynamicproxy.Interceptor;
-import net.neoremind.dynamicproxy.Invocation;
 import net.neoremind.dynamicproxy.ObjectInvoker;
 import net.neoremind.dynamicproxy.ObjectProvider;
 import net.neoremind.dynamicproxy.exception.ProxyCreatorException;
+import net.neoremind.dynamicproxy.support.DelegatorInvoker;
+import net.neoremind.dynamicproxy.support.InterceptorInvoker;
+import net.neoremind.dynamicproxy.support.Invokering;
 import net.neoremind.dynamicproxy.template.ClassCache;
 import net.neoremind.dynamicproxy.template.GeneratorTemplate;
 import net.neoremind.dynamicproxy.template.SubclassCreatorTemplate;
-import net.neoremind.dynamicproxy.util.ObjectUtil;
-import net.neoremind.dynamicproxy.util.ProxyUtil;
 
 /**
  * ASMCreator
@@ -51,7 +49,7 @@ public class ASMCreator extends SubclassCreatorTemplate {
         return createProxy(classLoader, new Invokering(invoker), proxyClasses);
     }
 
-    private <T> T createProxy(ClassLoader classLoader, AbstractInvoker invoker, final Class<?>... proxyClasses) {
+    private <T> T createProxy(ClassLoader classLoader, ObjectInvoker invoker, final Class<?>... proxyClasses) {
         Class<?> proxyClass = PROXY_CLASS_CACHE.getProxyClass(classLoader, proxyClasses);
         try {
             @SuppressWarnings("unchecked")
@@ -298,117 +296,4 @@ public class ASMCreator extends SubclassCreatorTemplate {
         }
     }
 
-    private static class DelegatorInvoker extends AbstractInvoker {
-
-        private static final long serialVersionUID = -5508558789066033954L;
-
-        private final ObjectProvider<?> delegateProvider;
-
-        protected DelegatorInvoker(ObjectProvider<?> delegateProvider) {
-            this.delegateProvider = delegateProvider;
-        }
-
-        @Override
-        public Object invokeImpl(Object proxy, Method method, Object[] args) throws Throwable {
-            try {
-                return method.invoke(delegateProvider.getObject(), args);
-            } catch (InvocationTargetException e) {
-                throw e.getTargetException();
-            }
-        }
-    }
-
-    private static class InterceptorInvoker extends AbstractInvoker {
-
-        private static final long serialVersionUID = -1409839456330694048L;
-
-        private final Object target;
-        private final Interceptor methodInterceptor;
-
-        public InterceptorInvoker(Object target, Interceptor methodInterceptor) {
-            this.target = target;
-            this.methodInterceptor = methodInterceptor;
-        }
-
-        @Override
-        public Object invokeImpl(Object proxy, Method method, Object[] args) throws Throwable {
-            final ReflectionInvocation invocation = new ReflectionInvocation(target, proxy, method, args);
-            return methodInterceptor.intercept(invocation);
-        }
-    }
-
-    private abstract static class AbstractInvoker implements ObjectInvoker, Serializable {
-
-        private static final long serialVersionUID = -4379566817117145667L;
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object... args) throws Throwable {
-            if (ProxyUtil.isHashCode(method)) {
-                return Integer.valueOf(System.identityHashCode(proxy));
-            }
-
-            if (ProxyUtil.isEqualsMethod(method)) {
-                return Boolean.valueOf(proxy == args[0]);
-            }
-
-            return invokeImpl(proxy, method, args);
-        }
-
-        protected abstract Object invokeImpl(Object proxy, Method method, Object[] args) throws Throwable;
-    }
-
-    private static class Invokering extends AbstractInvoker {
-
-        private static final long serialVersionUID = 1822915849692440651L;
-
-        private final ObjectInvoker invoker;
-
-        public Invokering(ObjectInvoker invoker) {
-            this.invoker = invoker;
-        }
-
-        @Override
-        public Object invokeImpl(Object proxy, Method method, Object[] args) throws Throwable {
-            return invoker.invoke(proxy, method, args);
-        }
-    }
-
-    private static class ReflectionInvocation implements Invocation {
-        private final Method method;
-        private final Object[] arguments;
-        private final Object proxy;
-        private final Object target;
-
-        public ReflectionInvocation(final Object target, final Object proxy, final Method method,
-                                    final Object[] arguments) {
-            this.method = method;
-            this.arguments = ObjectUtil.defaultIfNull(ArrayUtils.clone(arguments), ProxyUtil.EMPTY_ARGUMENTS);
-            this.proxy = proxy;
-            this.target = target;
-        }
-
-        @Override
-        public Object[] getArguments() {
-            return arguments;
-        }
-
-        @Override
-        public Method getMethod() {
-            return method;
-        }
-
-        @Override
-        public Object getProxy() {
-            return proxy;
-        }
-
-        @Override
-        public Object proceed() throws Throwable {
-            try {
-                return method.invoke(target, arguments);
-            } catch (InvocationTargetException e) {
-                throw e.getTargetException();
-            }
-        }
-    }
 }

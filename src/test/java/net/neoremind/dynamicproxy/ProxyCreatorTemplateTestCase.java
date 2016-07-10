@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.SortedSet;
@@ -34,7 +33,7 @@ import net.neoremind.dynamicproxy.sample.SuffixInterceptor;
 
 public abstract class ProxyCreatorTemplateTestCase {
 
-    private static final Class<?>[] ECHO_ONLY = new Class[] {Echo.class};
+    protected static final Class<?>[] ECHO_ONLY = new Class[] {Echo.class};
 
     protected ProxyCreator factory;
 
@@ -64,7 +63,7 @@ public abstract class ProxyCreatorTemplateTestCase {
 
     protected abstract Class<?> getSpiImpl();
 
-    private ObjectProvider<Echo> createSingletonEcho() {
+    protected ObjectProvider<Echo> createSingletonEcho() {
         return new SingletonProvider<Echo>(new BeanProvider<Echo>(EchoImpl.class));
     }
 
