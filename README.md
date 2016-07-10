@@ -35,3 +35,33 @@ public static void testSpiCreator() {
     assertThat(service.echo("wow"), Matchers.is("wow"));
 }
 ```
+
+Create Performace
+```
+-------------------------------------
+| Create proxy number:   10000      |
+-------------------------------------
+|   ProxyCreator   |    time cost   |
+-------------------------------------
+| ByteBuddyCreator |    7792ms      |
+|       ASMCreator |      51ms      |
+|     CglibCreator |     318ms      |
+| JavassistCreator |     107ms      |
+|  JdkProxyCreator |      53ms      |
+-------------------------------------
+```
+
+Invoke Performance
+```
+-------------------------------------
+| Invoke number:     1000000        |
+-------------------------------------
+|   ProxyCreator   |    time cost   |
+-------------------------------------
+| ByteBuddyCreator |       8ms      |
+|       ASMCreator |     718ms      |
+|     CglibCreator |      12ms      |
+| JavassistCreator |     959ms      |
+|  JdkProxyCreator |      20ms      |
+-------------------------------------
+```
