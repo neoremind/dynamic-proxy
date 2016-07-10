@@ -17,7 +17,7 @@ import net.neoremind.dynamicproxy.sample.Echo;
 /**
  * 性能测试JVM参数设置
  * <pre>
- *     -Xms512m -Xmx512m -XX:PermSize=128M -XX:MaxPermSize=128M
+ *     -Xms512m -Xmx512m -XX:PermSize=128M -XX:MaxPermSize=128M -verbose:gc
  * </pre>
  *
  * @author zhangxu
@@ -46,13 +46,13 @@ public class PerformaceTest {
         List<Profiler> profilerList = Lists.newArrayList();
 
         profilerList.add(innerTestCreate(byteBuddyCreator, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestCreate(asmCreator, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestCreate(cglibCreator, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestCreate(javassistCreator, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestCreate(jdkProxyCreator, invokeNum));
 
         System.out.println("-------------------------------------");
@@ -75,16 +75,22 @@ public class PerformaceTest {
         Echo asmCreatorInvokerProxy = asmCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
         Echo byteBuddyCreatorInvokerProxy = byteBuddyCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
 
-        tryGcAndSleep(2);
+        // warmup
+        innerTestInvoke(byteBuddyCreator, byteBuddyCreatorInvokerProxy, 1);
+        innerTestInvoke(asmCreator, asmCreatorInvokerProxy, 1);
+        innerTestInvoke(cglibCreator, cglibCreatorInvokerProxy, 1);
+        innerTestInvoke(javassistCreator, javassistCreatorInvokerProxy, 1);
+        innerTestInvoke(jdkProxyCreator, jdkProxyCreatorInvokerProxy, 1);
+        hang(2);
 
         profilerList.add(innerTestInvoke(byteBuddyCreator, byteBuddyCreatorInvokerProxy, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestInvoke(asmCreator, asmCreatorInvokerProxy, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestInvoke(cglibCreator, cglibCreatorInvokerProxy, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestInvoke(javassistCreator, javassistCreatorInvokerProxy, invokeNum));
-        tryGcAndSleep(2);
+        hang(2);
         profilerList.add(innerTestInvoke(jdkProxyCreator, jdkProxyCreatorInvokerProxy, invokeNum));
 
         System.out.println("-------------------------------------");
@@ -150,9 +156,9 @@ public class PerformaceTest {
         }
     }
 
-    private void tryGcAndSleep(int sec) {
+    private void hang(int sec) {
         try {
-            System.gc();
+            //System.gc();
             Thread.sleep(sec * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
