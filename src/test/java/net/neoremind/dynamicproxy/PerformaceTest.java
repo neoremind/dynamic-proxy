@@ -5,11 +5,11 @@ import java.lang.reflect.Method;
 import org.junit.Test;
 
 import net.neoremind.dynamicproxy.impl.ASMCreator;
+import net.neoremind.dynamicproxy.impl.ByteBuddyCreator;
 import net.neoremind.dynamicproxy.impl.CglibCreator;
 import net.neoremind.dynamicproxy.impl.JavassistCreator;
 import net.neoremind.dynamicproxy.impl.JdkProxyCreator;
 import net.neoremind.dynamicproxy.sample.Echo;
-import net.neoremind.dynamicproxy.sample.Sound;
 
 /**
  * @author zhangxu
@@ -22,8 +22,8 @@ public class PerformaceTest {
     private ProxyCreator javassistCreator = new JavassistCreator();
     private ProxyCreator cglibCreator = new CglibCreator();
     private ProxyCreator asmCreator = new ASMCreator();
+    private ProxyCreator byteBuddyCreator = new ByteBuddyCreator();
 
-    //public static final int INVOKE_NUM = 1000 * 1000 * 10;
     public static final int INVOKE_NUM = 1000 * 1000 * 10;
 
     @Test
@@ -32,7 +32,9 @@ public class PerformaceTest {
         Echo javassistCreatorInvokerProxy = javassistCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
         Echo cglibCreatorInvokerProxy = cglibCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
         Echo asmCreatorInvokerProxy = asmCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
+        Echo byteBuddyCreatorInvokerProxy = byteBuddyCreator.createInvokerProxy(new InvokerTester(), ECHO_ONLY);
 
+        innerTest(byteBuddyCreatorInvokerProxy);
         innerTest(asmCreatorInvokerProxy);
         innerTest(cglibCreatorInvokerProxy);
         innerTest(javassistCreatorInvokerProxy);
