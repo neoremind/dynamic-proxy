@@ -7,9 +7,6 @@ import net.neoremind.dynamicproxy.util.ReflectionUtil;
 
 public class BeanProvider<T> implements ObjectProvider<T>, Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 6261791550469264285L;
 
     private final Class<? extends T> beanClass;

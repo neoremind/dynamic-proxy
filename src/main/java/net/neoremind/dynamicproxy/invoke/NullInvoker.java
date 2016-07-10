@@ -7,10 +7,7 @@ import net.neoremind.dynamicproxy.ObjectInvoker;
 import net.neoremind.dynamicproxy.util.ProxyUtil;
 
 /**
- * 代表“NULL”的Invoker
- *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-10 上午12:51:56
+ * @author zhangxu
  */
 public class NullInvoker implements ObjectInvoker, Serializable {
 

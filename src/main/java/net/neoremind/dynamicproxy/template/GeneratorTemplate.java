@@ -12,8 +12,7 @@ import com.google.common.collect.Sets;
 import net.neoremind.dynamicproxy.MethodSignature;
 
 /**
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:44:31
+ * @author zhangxu
  */
 public abstract class GeneratorTemplate implements ClassGenerator {
 

@@ -12,8 +12,7 @@ import net.neoremind.dynamicproxy.ProxyCreator;
 /**
  * 动态代理相关的工具类
  *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:40:28
+ * @author zhangxu
  */
 public abstract class ProxyUtil {
 

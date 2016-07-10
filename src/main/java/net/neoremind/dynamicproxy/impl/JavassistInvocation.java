@@ -17,10 +17,6 @@ import net.neoremind.dynamicproxy.util.JavassistUtil;
 import net.neoremind.dynamicproxy.util.ObjectUtil;
 import net.neoremind.dynamicproxy.util.ProxyUtil;
 
-/**
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:57:37
- */
 public abstract class JavassistInvocation implements Invocation {
 
     private static Map<ClassLoader, Map<String, WeakReference<Class<?>>>> loaderToClassCache = Maps.newHashMap();

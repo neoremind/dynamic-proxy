@@ -14,8 +14,7 @@ import javassist.NotFoundException;
 import net.neoremind.dynamicproxy.exception.ObjectProviderException;
 
 /**
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-13 上午12:45:22
+ * @author zhangxu
  */
 public abstract class JavassistUtil {
 

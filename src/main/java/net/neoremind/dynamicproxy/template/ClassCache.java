@@ -10,8 +10,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:46:02
+ * @author zhangxu
  */
 public class ClassCache {
 

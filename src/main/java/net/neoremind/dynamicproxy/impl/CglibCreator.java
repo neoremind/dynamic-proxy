@@ -22,8 +22,7 @@ import net.sf.cglib.proxy.MethodProxy;
 /**
  * CglibCreator
  *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:55:53
+ * @author zhangxu
  */
 public class CglibCreator extends SubclassCreatorTemplate {
 

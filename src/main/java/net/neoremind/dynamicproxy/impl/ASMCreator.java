@@ -25,8 +25,7 @@ import net.neoremind.dynamicproxy.template.SubclassCreatorTemplate;
 /**
  * ASMCreator
  *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:54:04
+ * @author zhangxu
  */
 public class ASMCreator extends SubclassCreatorTemplate {
 

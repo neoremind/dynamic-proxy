@@ -10,8 +10,7 @@ import com.google.common.collect.Sets;
 import net.neoremind.dynamicproxy.exception.ProxyCreatorException;
 
 /**
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:50:38
+ * @author zhangxu
  */
 public abstract class SubclassCreatorTemplate extends CreatorTemplate {
 

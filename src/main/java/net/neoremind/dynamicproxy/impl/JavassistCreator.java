@@ -23,8 +23,7 @@ import net.neoremind.dynamicproxy.util.ProxyUtil;
 /**
  * JavassistCreator
  *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午10:58:48
+ * @author zhangxu
  */
 public class JavassistCreator extends SubclassCreatorTemplate {
 

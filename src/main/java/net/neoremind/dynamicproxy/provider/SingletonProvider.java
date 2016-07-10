@@ -8,9 +8,6 @@ import net.neoremind.dynamicproxy.ObjectProvider;
  */
 public class SingletonProvider<T> extends ProviderDecorator<T> {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -3715549852313953689L;
 
     private T instance;

@@ -10,9 +10,6 @@ import net.neoremind.dynamicproxy.ObjectProvider;
  */
 public class ConstantProvider<T> implements ObjectProvider<T>, Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -8677993768843722265L;
 
     private final T constant;

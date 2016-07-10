@@ -19,8 +19,7 @@ import net.neoremind.dynamicproxy.util.ProxyUtil;
 /**
  * JdkProxyCreator
  *
- * @author <a href="mailto:xuchen06@baidu.com">xuc</a>
- * @version create on 2015-3-9 下午11:00:42
+ * @author zhangxu
  */
 public class JdkProxyCreator extends CreatorTemplate {
 
