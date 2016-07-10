@@ -2,6 +2,9 @@ language: java
 
 jdk:
   - openjdk6
+#
+#install:
+#    mvn test
 
-install:
-    mvn test
+after_success:
+  - mvn jacoco:report coveralls:report
