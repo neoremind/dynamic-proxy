@@ -141,7 +141,7 @@ The SPI class `ProxyCreator` can be subclassed into classes including:
 * ByteBuddyCreator
 * JdkProxyCreator
 
-You can specify the implementation by creating a file named `net.neoremind.dynamicproxy.ProxyCreator` under META-INF/services folder.
+You can specify the implementation by creating a file named `net.neoremind.dynamicproxy.ProxyCreator` under `META-INF/services` folder.
 
 The content looks like below, this is also the default configuration.
 
@@ -167,7 +167,7 @@ assertThat(service.echo("wow"), Matchers.is("wow"));
 
 
 ## 2. Performace test
-Tests execution environment:
+Test execution environment:
 ```
 CPU: Intel(R) Core(TM) i5-4278U CPU @ 2.60GHz
 MEM: 8G
