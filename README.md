@@ -231,7 +231,7 @@ Here ASMCreator performs way better under Java8 compared with Java6/7. That is b
 |  JdkProxyCreator |      53ms      |
 -------------------------------------
 ```
-Results shows no big difference on Java6,7,8.
+Result shows no big difference on Java6,7,8.
 
 ## 3. Dependencies
 By default, the following dependencies will bring into your project.
