@@ -47,10 +47,10 @@ Invoker is very useful when implementing a RPC client, caller can depend on an i
 
 ```
 ProxyCreator proxyCreator = new CglibCreator();
-//        ProxyCreator proxyCreator = new ASMCreator();
-//        ProxyCreator proxyCreator = new JavassistCreator();
-//        ProxyCreator proxyCreator = new ByteBuddyCreator();
-//        ProxyCreator proxyCreator = new JdkProxyCreator();
+//  ProxyCreator proxyCreator = new ASMCreator();
+//  ProxyCreator proxyCreator = new JavassistCreator();
+//  ProxyCreator proxyCreator = new ByteBuddyCreator();
+//  ProxyCreator proxyCreator = new JdkProxyCreator();
 
 ObjectInvoker fixedStringObjInvoker = new ObjectInvoker() {
     @Override
@@ -167,6 +167,12 @@ assertThat(service.echo("wow"), Matchers.is("wow"));
 
 
 ## 2. Performace test
+Tests execution environment:
+```
+CPU: Intel(R) Core(TM) i5-4278U CPU @ 2.60GHz
+MEM: 8G
+JVM Args: -Xms512m -Xmx512m -XX:PermSize=128M -XX:MaxPermSize=128M
+```
 ###2.1 Invocation performance test result
 ####Java6 and 7
 
@@ -225,7 +231,7 @@ Here ASMCreator performs way better under Java8 compared with Java6/7. That is b
 |  JdkProxyCreator |      53ms      |
 -------------------------------------
 ```
-
+Results shows no big difference on Java6,7,8.
 
 ## 3. Dependencies
 By default, the following dependencies will bring into your project.
