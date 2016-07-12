@@ -4,6 +4,7 @@
 
 ![](https://travis-ci.org/neoremind/dynamic-proxy.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/neoremind/dynamic-proxy/badge.svg?branch=master)](https://coveralls.io/github/neoremind/dynamic-proxy?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.neoremind/dynamicproxy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.neoremind/dynamicproxy)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Dynamic proxy is a useful library for Java developers to generate proxy object. This library leverages a wide range of byte-code generation methods, including 
@@ -167,6 +168,8 @@ assertThat(service.echo("wow"), Matchers.is("wow"));
 
 
 ## 2. Performace test
+The following performance tests are based on `Invoker` mode. To view source code, please [visit here](https://github.com/neoremind/dynamic-proxy/blob/master/src/test/java/net/neoremind/dynamicproxy/PerformaceTest.java).
+
 Test execution environment:
 ```
 CPU: Intel(R) Core(TM) i5-4278U CPU @ 2.60GHz
